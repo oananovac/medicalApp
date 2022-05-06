@@ -169,3 +169,7 @@ router.post("/register", async (req, res) => {
 ```
 
 ## Step 5: Add cookies
+
+## Step 6: Authorize only authenticated users
+
+Adds middleware/permission.js to check if the user is authenticated.

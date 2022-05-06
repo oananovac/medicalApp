@@ -5,6 +5,7 @@ const Patient = require("../models/Patient");
 const bcrypt = require("bcryptjs");
 const validateRegisterInput = require("../validation/registerValidation");
 const jwt = require("jsonwebtoken");
+const requiresAuth = require("../middleware/permission");
 
 // @route   GET/api/auth/test
 // @desc    Test the auth rout
@@ -104,6 +105,17 @@ router.post("/login", async (req, res) => {
 
     return res.status(500).send(error.message);
   }
+});
+
+// @route   GET/api/auth/current
+// @desc    Return the currently authed user
+// @access  Private
+router.get("/current", requiresAuth, (req, res) => {
+  if (!req.user) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  return res.json(req.user);
 });
 
 module.exports = router;
