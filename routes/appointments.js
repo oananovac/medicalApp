@@ -65,4 +65,102 @@ router.get("/myAppointments", requiresAuth, async (req, res) => {
   }
 });
 
+// @route   PUT/api/appointments/:appointmentId/complete
+// @desc    Create a new appointment
+// @access  Private
+router.put("/:appointmentId/complete", requiresAuth, async (req, res) => {
+  try {
+    const appointment = await Appointment.findOne({
+      user: req.user._id,
+      _id: req.params.appointmentId,
+    });
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+
+    if (appointment.completed) {
+      return res.status(404).json({ error: "Appointment already completed" });
+    }
+
+    const updatedAppointment = await Appointment.findOneAndUpdate(
+      {
+        user: req.user._id,
+        _id: req.params.appointmentId,
+      },
+      { completed: true, completedAt: new Date() },
+      { new: true }
+    );
+
+    return res.json({ updatedAppointment: updatedAppointment });
+  } catch (error) {
+    console.log("[*] Error " + error);
+
+    return res.status(500).send(error.message);
+  }
+});
+
+// @route   PUT/api/appointments/:appointmentId
+// @desc    Update an appointment
+// @access  Private
+router.put("/:appointmentId", requiresAuth, async (req, res) => {
+  try {
+    const appointment = await Appointment.findOne({
+      user: req.user._id,
+      _id: req.params.appointmentId,
+    });
+
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+
+    const { isValid, errors } = validateAppointment(req.body);
+
+    if (!isValid) {
+      return res.status(404).json(errors);
+    }
+
+    const updatedAppointment = await Appointment.findOneAndUpdate(
+      {
+        user: req.user._id,
+        _id: req.params.appointmentId,
+      },
+      { content: req.body.content },
+      { new: true }
+    );
+
+    return res.json(updatedAppointment);
+  } catch (error) {
+    console.log("[*] Error " + error);
+
+    return res.status(500).send(error.message);
+  }
+});
+
+// @route   DELETE/api/appointments/:appointmentId
+// @desc    Cancel an appointment
+// @access  Private
+router.delete("/:appointmentId", requiresAuth, async (req, res) => {
+  try {
+    const appointment = await Appointment.findOne({
+      user: req.user._id,
+      _id: req.params.appointmentId,
+    });
+
+    if (!appointment) {
+      return res.status(404).json({ error: "Appointment not found" });
+    }
+
+    await Appointment.findOneAndRemove({
+      user: req.user._id,
+      _id: req.params.appointmentId,
+    });
+
+    return res.json({ success: true });
+  } catch (error) {
+    console.log("[*] Error " + error);
+
+    return res.status(500).send(error.message);
+  }
+});
+
 module.exports = router;

@@ -175,3 +175,5 @@ router.post("/register", async (req, res) => {
 Adds middleware/permission.js to check if the user is authenticated.
 
 ## Step 7: Create appointments and get current user appointments
+
+## Step 8: Update and delete appointments
