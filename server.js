@@ -1,13 +1,18 @@
 require("dotenv").config();
+const mongoose = require("mongoose");
+var bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
-const mongoose = require("mongoose");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+/** Routes imports */
+const authRoute = require("./routes/auth");
 
-app.get("/", (req, res) => {
+app.use("/api/auth", authRoute);
+
+app.get("/api", (req, res) => {
   res.send("React App");
 });
 
