@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+const cookieParser = require("cookie-parser");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 /** Routes imports */
 const authRoute = require("./routes/auth");

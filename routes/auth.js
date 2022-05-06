@@ -4,6 +4,7 @@ const User = require("../models/User");
 const Patient = require("../models/Patient");
 const bcrypt = require("bcryptjs");
 const validateRegisterInput = require("../validation/registerValidation");
+const jwt = require("jsonwebtoken");
 
 // @route   GET/api/auth/test
 // @desc    Test the auth rout
@@ -60,6 +61,48 @@ router.post("/register", async (req, res) => {
     console.log("[*] Error: " + error);
 
     res.status(500).send(error.message);
+  }
+});
+
+// @route   POST/api/auth/login
+// @desc    Login user and return an access token
+// @access  Public
+router.post("/login", async (req, res) => {
+  try {
+    //   check for the user
+    const user = await User.findOne({
+      email: new RegExp("^" + req.body.email + "$", "i"),
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: "Something went wrong" });
+    }
+
+    const passwordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!passwordMatch) {
+      return res.status(400).json({ error: "Something went wrong" });
+    }
+
+    const payload = { userId: user._id };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("access-token", token, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      httpOnly: true,
+    });
+
+    return res.json({ token: token, user: user });
+  } catch (error) {
+    console.log("[*] Error: " + error);
+
+    return res.status(500).send(error.message);
   }
 });
 

@@ -167,3 +167,5 @@ router.post("/register", async (req, res) => {
     // Hash PASSWORD
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
 ```
+
+## Step 5: Add cookies
