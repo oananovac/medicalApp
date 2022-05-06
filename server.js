@@ -11,8 +11,10 @@ app.use(cookieParser());
 
 /** Routes imports */
 const authRoute = require("./routes/auth");
+const appointmentsRoute = require("./routes/appointments");
 
 app.use("/api/auth", authRoute);
+app.use("/api/appointments", appointmentsRoute);
 
 app.get("/api", (req, res) => {
   res.send("React App");
