@@ -135,3 +135,35 @@ router.post("/register", async (req, res) => {
   }
 });
 ```
+
+## Step 4: Add user validation
+
+Adds the following files:
+
+- registerValidation.js
+- isEmpty.js
+
+```javascript
+
+router.post("/register", async (req, res) => {
+  try {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    // Check for existing user
+    const existingEmail = await User.findOne({
+      email: new RegExp("^" + req.body.email + "$", "i"),
+    });
+
+    if (existingEmail) {
+      return res
+        .status(400)
+        .json({ erros: "There is already a user with this email" });
+    }
+
+    // Hash PASSWORD
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+```
