@@ -2,6 +2,7 @@ body {
   font-family: "Montserrat", sans-serif;
   padding: 0;
   margin: 0;
+  width: 100;
 }
 
 p,
@@ -19,12 +20,10 @@ textarea {
 }
 
 .main-header {
-  margin: 2%;
+  margin-right: 10px;
 }
-
 .main-header__inner {
   align-items: center;
-  /* flex-wrap: wrap; */
   display: flex;
   justify-content: space-between;
 }
@@ -39,9 +38,8 @@ textarea {
 .auth {
   display: flex;
   justify-content: center;
-  margin-top: 20%;
+  margin-top: 5%;
 }
-
 .submitBtn {
   margin-top: 20px;
 }
@@ -72,4 +70,18 @@ textarea {
 
 .auth_msg {
   text-align: center;
+}
+
+.links-info {
+  margin-right: 0;
+}
+
+.sidebar {
+  display: flex;
+  min-height: 85vh;
+  flex-flow: column;
+}
+
+.delimiter {
+  margin: 0;
 }

@@ -29,7 +29,7 @@ const Header = () => {
           MedicalApp
         </a>
         {pathname !== "/" && pathname !== "/register" ? (
-          <div className="links-info mr-auto">
+          <div className="links-info ms-auto">
             <Link className="appointmentsLink m-2" to="/about">
               About us
             </Link>

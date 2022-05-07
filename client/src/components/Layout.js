@@ -13,8 +13,11 @@ const Layout = () => {
       <Routes>
         <Route exact path="/" element={<AuthBox />} />
         <Route path="/register" element={<AuthBox register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/myAppointments" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard route="dashboard" />} />
+        <Route
+          path="/appointments"
+          element={<Dashboard route="appointments" />}
+        />
       </Routes>
     </BrowserRouter>
   );

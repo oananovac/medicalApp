@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 
-const PatientDashboard = () => {
+const Appointments = () => {
   const { user } = useGlobalContext();
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const PatientDashboard = () => {
     }
   }, [user, navigate]);
 
-  return <div>Helloooo </div>;
+  return <div>Helloooo 2 </div>;
 };
 
-export default PatientDashboard;
+export default Appointments;

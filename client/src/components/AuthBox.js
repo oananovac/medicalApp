@@ -46,7 +46,7 @@ const AuthBox = ({ register }) => {
   };
   return (
     <div class="auth row">
-      <div class="col-sm-8">
+      <div class="col-md-6 col-lg-4 col">
         <div class="card">
           <div class="card-body">
             <h1 className="loginTitle">{register ? "Register" : "Login"}</h1>
