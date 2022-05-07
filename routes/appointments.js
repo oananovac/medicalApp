@@ -26,7 +26,7 @@ router.post("/new", requiresAuth, async (req, res) => {
     const newAppointment = new Appointment({
       user: req.user._id,
       content: req.body.content,
-      complete: false,
+      completed: false,
     });
 
     await newAppointment.save();

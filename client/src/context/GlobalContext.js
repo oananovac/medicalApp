@@ -5,8 +5,8 @@ import axios from "axios";
 const initialState = {
   user: null,
   fetchingUser: true,
-  completeAppoitments: [],
-  incompletedAppointments: [],
+  completeAppointments: [],
+  incompleteAppointments: [],
 };
 
 // Reducer
@@ -21,19 +21,19 @@ const globalReducer = (state, action) => {
     case "SET_COMPLETE_APPOINTMENTS":
       return {
         ...state,
-        completeAppoitments: action.payload,
+        completeAppointments: action.payload,
       };
     case "SET_INCOMPLETE_APPOINTMENTS":
       return {
         ...state,
-        incompleteAppoitments: action.payload,
+        incompleteAppointments: action.payload,
       };
     case "RESET_USER":
       return {
         ...state,
         user: null,
-        incompleteAppoitments: [],
-        completeAppoitments: [],
+        incompleteAppointments: [],
+        completeAppointments: [],
         fetchingUser: false,
       };
 
@@ -66,11 +66,11 @@ export const GlobalProvider = (props) => {
           dispatch({ type: "SET_USER", payload: res.data });
           dispatch({
             type: "SET_COMPLETE_APPOINTMENTS",
-            payload: currentAppointments.data.completedAppoitments,
+            payload: currentAppointments.data.completedAppointments,
           });
           dispatch({
             type: "SET_INCOMPLETE_APPOINTMENTS",
-            payload: currentAppointments.data.incompletedAppoitments,
+            payload: currentAppointments.data.incompletedAppointments,
           });
         }
       } else {

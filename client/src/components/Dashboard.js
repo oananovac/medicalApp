@@ -23,7 +23,7 @@ const Dashboard = (props) => {
             <div>Dashboard 1</div>
           ) : (
             <div className="row">
-              <div class="col-2" style={{ padding: "0px" }}>
+              <div class="col-sm-3" style={{ padding: "0px" }}>
                 <Sidebar />
               </div>
               <div class="col-9" style={{ padding: "10px" }}>
