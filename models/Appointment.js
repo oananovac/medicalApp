@@ -7,6 +7,8 @@ const AppointmentSchema = new Schema(
       ref: "User",
     },
     content: { type: String, required: true },
+    service: { type: String, required: true },
+    date: { type: String },
     completed: { type: Boolean, default: false },
     completedAt: { type: Date },
   },

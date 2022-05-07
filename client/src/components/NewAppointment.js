@@ -11,12 +11,21 @@ const NewAppointment = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("/api/appointments/new", { content: content }).then((res) => {
-      setContent("");
+    axios
+      .post("/api/appointments/new", {
+        content: content,
+        service: "service",
+        datePick: datePick,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setContent("");
+        setService("");
+        setDatePick("");
 
-      // Add Appointment
-      addAppointment(res.data);
-    });
+        // Add Appointment
+        addAppointment(res.data);
+      });
   };
 
   return (
@@ -63,7 +72,7 @@ const NewAppointment = () => {
         </button>
       </form>
 
-      <p>Selector: {datePick}</p>
+      <p>Selector: {typeof datePick}</p>
     </div>
   );
 };

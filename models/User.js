@@ -13,7 +13,7 @@ const UserSchema = new Schema(
           enum: ["patient", "admin", "doctor"],
         },
       ],
-      default: "patient",
+      default: "admin",
     },
   },
   { timestamps: true }

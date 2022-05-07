@@ -5,6 +5,9 @@ import { useGlobalContext } from "../context/GlobalContext";
 
 const AppointmentCard = ({ appointment }) => {
   const [content, setContent] = React.useState(appointment.content);
+  const [service, setService] = React.useState(appointment.service);
+  const [date, setDate] = React.useState(appointment.date);
+
   const [editing, setEditing] = React.useState(false);
   const input = React.useRef(null);
   const navigate = useNavigate();
@@ -48,7 +51,11 @@ const AppointmentCard = ({ appointment }) => {
     e.preventDefault();
 
     axios
-      .put(`/api/appointments/${appointment._id}`, { content })
+      .put(`/api/appointments/${appointment._id}`, {
+        content: content,
+        service: service,
+        date: date,
+      })
       .then((res) => {
         updateAppointment(res.data);
         setEditing(false);
@@ -67,6 +74,28 @@ const AppointmentCard = ({ appointment }) => {
         readOnly={!editing}
         onChange={(e) => setContent(e.target.value)}
       />
+      <select
+        class="form-control"
+        value={service}
+        onChange={(e) => setService(e.target.value)}
+        required
+        disabled={!editing}
+      >
+        <option>Cardiology</option>
+        <option>Dermatology</option>
+        <option>Oftalmology</option>
+        <option>Gynaecology</option>
+        <option>Neurology</option>
+      </select>
+
+      <input
+        class="form-control"
+        value={date}
+        disabled={!editing}
+        onChange={(e) => setDate(e.target.value)}
+        type="date"
+        required
+      ></input>
       <div className="appButtons">
         {!editing ? (
           <>

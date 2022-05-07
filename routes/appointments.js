@@ -26,6 +26,8 @@ router.post("/new", requiresAuth, async (req, res) => {
     const newAppointment = new Appointment({
       user: req.user._id,
       content: req.body.content,
+      service: req.body.service,
+      date: req.body.datePick,
       completed: false,
     });
 
@@ -124,7 +126,11 @@ router.put("/:appointmentId", requiresAuth, async (req, res) => {
         user: req.user._id,
         _id: req.params.appointmentId,
       },
-      { content: req.body.content },
+      {
+        content: req.body.content,
+        service: req.body.service,
+        date: req.body.date,
+      },
       { new: true }
     );
 
