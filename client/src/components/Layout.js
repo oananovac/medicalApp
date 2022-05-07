@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import AuthBox from "./AuthBox";
 import Dashboard from "./Dashboard";
-import { useGlobalContext } from "../context/GlobalContext";
+// import { useGlobalContext } from "../context/GlobalContext";
 
 const Layout = () => {
-  const { fetchingUser } = useGlobalContext();
+  // const { fetchingUser } = useGlobalContext();
   return (
     <BrowserRouter>
       <Header />

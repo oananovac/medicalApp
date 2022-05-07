@@ -1,5 +1,11 @@
 # medicalApp
 
+To start the app:
+
+```bash
+npm run dev
+```
+
 ## Step 1: Setup Node server
 
 ```bash
@@ -15,7 +21,7 @@ npm i --save-dev nodemon concurrently
 To start the server:
 
 ```bash
-npm run server
+npm run dev
 ```
 
 ## Step 2: Connect server to MongoDB Atlas
