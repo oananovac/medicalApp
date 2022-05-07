@@ -1,0 +1,135 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  padding: 0;
+  margin: 0;
+  width: 100;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font-family: "Montserrat", sans-serif;
+}
+
+.main-header {
+  margin-right: 10px;
+}
+.main-header__inner {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.appointmentsLink {
+  color: #000;
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.auth {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+.submitBtn {
+  margin-top: 20px;
+}
+
+.loginTitle {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.auth_err {
+  color: red;
+  text-align: center;
+  margin-top: 30px;
+}
+.auth_error {
+  color: red;
+  font-weight: 200;
+  font-size: 12px;
+  text-align: center;
+}
+
+.nav-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.auth_msg {
+  text-align: center;
+}
+
+.links-info {
+  margin-right: 0;
+}
+
+.sidebar {
+  display: flex;
+  min-height: 85vh;
+  flex-flow: column;
+}
+
+.delimiter {
+  margin: 0;
+}
+
+.dashboard {
+  margin: 0;
+  padding: 15px;
+}
+
+.complete {
+  margin: 0 5;
+}
+
+.complete_item,
+.incomplete_item {
+  margin: 10px;
+}
+
+.appointmentItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f4f9f9;
+}
+
+:not(:last-child) .appointmentItem {
+  margin-bottom: 15px;
+}
+
+input.appointmentContent {
+  background-color: transparent;
+  border: none;
+  flex-grow: 1;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+input.appointmentContent:focus {
+  outline: none;
+}
+
+.control-buttons {
+  display: block;
+  margin: 5px;
+  color: #fff;
+}
+
+.appButtons {
+  display: flex;
+}
