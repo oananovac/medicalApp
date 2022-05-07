@@ -131,6 +131,26 @@ export const GlobalProvider = (props) => {
     });
   };
 
+  const updateAppointment = (newAppointment) => {
+    if (newAppointment.completed) {
+      const updatedApp = state.completeAppointments.map((old) =>
+        old._id !== newAppointment._id ? old : newAppointment
+      );
+
+      dispatch({ type: "SET_COMPLETE_APPOINTMENTS", payload: updatedApp });
+    } else {
+      const updatedAppIncomplete = state.incompleteAppointments.map(
+        (incomplete) =>
+          incomplete._id !== newAppointment._id ? incomplete : newAppointment
+      );
+
+      dispatch({
+        type: "SET_INCOMPLETE_APPOINTMENTS",
+        payload: updatedAppIncomplete,
+      });
+    }
+  };
+
   const value = {
     ...state,
     getCurrentUser,
@@ -138,6 +158,7 @@ export const GlobalProvider = (props) => {
     addAppointment,
     removeAppointment,
     completeAppointment,
+    updateAppointment,
   };
 
   return (

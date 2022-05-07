@@ -8,7 +8,8 @@ const AppointmentCard = ({ appointment }) => {
   const [editing, setEditing] = React.useState(false);
   const input = React.useRef(null);
   const navigate = useNavigate();
-  const { removeAppointment, completeAppointment } = useGlobalContext();
+  const { removeAppointment, completeAppointment, updateAppointment } =
+    useGlobalContext();
 
   const onEdit = (e) => {
     e.preventDefault();
@@ -43,6 +44,19 @@ const AppointmentCard = ({ appointment }) => {
       .then((res) => completeAppointment(res.data));
   };
 
+  const editAppointment = (e) => {
+    e.preventDefault();
+
+    axios
+      .put(`/api/appointments/${appointment._id}`, { content })
+      .then((res) => {
+        updateAppointment(res.data);
+        setEditing(false);
+      })
+      .catch(() => {
+        stopEditing();
+      });
+  };
   return (
     <div className="appointmentItem">
       <input
@@ -88,7 +102,12 @@ const AppointmentCard = ({ appointment }) => {
             >
               Cancel
             </button>
-            <button className="control-buttons btn btn-success">Save</button>
+            <button
+              onClick={editAppointment}
+              className="control-buttons btn btn-success"
+            >
+              Save
+            </button>
           </>
         )}
       </div>
