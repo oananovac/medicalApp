@@ -35,6 +35,14 @@ const Sidebar = () => {
         <li>
           <Link
             className="btn btn-toggle align-items-center rounded collapsed nav-link link-dark "
+            to="/newAppointment"
+          >
+            New Appointment
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="btn btn-toggle align-items-center rounded collapsed nav-link link-dark "
             to="/Prescriptions"
           >
             Prescriptions

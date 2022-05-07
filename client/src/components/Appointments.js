@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
+import AppointmentCard from "./AppointmentCard";
 
 const Appointments = () => {
   const { user, completeAppointments, incompleteAppointments } =
@@ -18,9 +19,12 @@ const Appointments = () => {
       <div className="incomplete">
         <h1> Upcoming Appointments:</h1>
         {incompleteAppointments ? (
-          <div className="incomplete">
+          <div className="incomplete_item">
             {incompleteAppointments.map((app) => (
-              <p key={app._id}>{app.content}</p>
+              <AppointmentCard
+                appointment={app}
+                key={app._id}
+              ></AppointmentCard>
             ))}
           </div>
         ) : (
@@ -30,9 +34,12 @@ const Appointments = () => {
       <div className="complete">
         <h1> Past Appointments:</h1>
         {completeAppointments ? (
-          <div className="complete">
+          <div className="complete_item">
             {completeAppointments.map((app) => (
-              <p key={app._id}>{app.content}</p>
+              <AppointmentCard
+                appointment={app}
+                key={app._id}
+              ></AppointmentCard>
             ))}
           </div>
         ) : (

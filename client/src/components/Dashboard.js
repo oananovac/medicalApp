@@ -4,6 +4,7 @@ import { useGlobalContext } from "../context/GlobalContext";
 import PatientDashboard from "./PatientDashboard";
 import Sidebar from "./Sidebar";
 import Appointments from "./Appointments";
+import NewAppointment from "./NewAppointment";
 
 const Dashboard = (props) => {
   const { user } = useGlobalContext();
@@ -29,6 +30,7 @@ const Dashboard = (props) => {
               <div class="col-9" style={{ padding: "10px" }}>
                 {props.route === "dashboard" && <PatientDashboard />}
                 {props.route === "appointments" && <Appointments />}
+                {props.route === "newAppointment" && <NewAppointment />}
               </div>
             </div>
           )}

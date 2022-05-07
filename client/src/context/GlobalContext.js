@@ -92,7 +92,13 @@ export const GlobalProvider = (props) => {
     }
   };
 
-  const value = { ...state, getCurrentUser, logout };
+  const addAppointment = (appointment) => {
+    dispatch({
+      type: "SET_INCOMPLETE_APPOINTMENTS",
+      payload: [appointment, ...state.incompleteAppointments],
+    });
+  };
+  const value = { ...state, getCurrentUser, logout, addAppointment };
 
   return (
     <GlobalContext.Provider value={value}>

@@ -85,3 +85,51 @@ textarea {
 .delimiter {
   margin: 0;
 }
+
+.dashboard {
+  margin: 0;
+  padding: 15px;
+}
+
+.complete {
+  margin: 0 5;
+}
+
+.complete_item,
+.incomplete_item {
+  margin: 10px;
+}
+
+.appointmentItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f4f9f9;
+}
+
+:not(:last-child) .appointmentItem {
+  margin-bottom: 15px;
+}
+
+input.appointmentContent {
+  background-color: transparent;
+  border: none;
+  flex-grow: 1;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+input.appointmentContent:focus {
+  outline: none;
+}
+
+.control-buttons {
+  display: block;
+  margin: 5px;
+  color: #fff;
+}
+
+.appButtons {
+  display: flex;
+}
