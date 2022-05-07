@@ -92,13 +92,53 @@ export const GlobalProvider = (props) => {
     }
   };
 
+  const removeAppointment = (appointment) => {
+    if (appointment.completed) {
+      dispatch({
+        type: "SET_COMPLETE_APPOINTMENTS",
+        payload: state.completeAppointments.filter(
+          (app) => appointment._id !== app._id
+        ),
+      });
+    } else {
+      dispatch({
+        type: "SET_INCOMPLETE_APPOINTMENTS",
+        payload: state.incompleteAppointments.filter(
+          (app) => appointment._id !== app._id
+        ),
+      });
+    }
+  };
+
   const addAppointment = (appointment) => {
     dispatch({
       type: "SET_INCOMPLETE_APPOINTMENTS",
       payload: [appointment, ...state.incompleteAppointments],
     });
   };
-  const value = { ...state, getCurrentUser, logout, addAppointment };
+
+  const completeAppointment = (appointment) => {
+    dispatch({
+      type: "SET_INCOMPLETE_APPOINTMENTS",
+      payload: state.incompleteAppointments.filter(
+        (app) => appointment._id !== app._id
+      ),
+    });
+
+    dispatch({
+      type: "SET_COMPLETE_APPOINTMENTS",
+      payload: [appointment, ...state.completeAppointments],
+    });
+  };
+
+  const value = {
+    ...state,
+    getCurrentUser,
+    logout,
+    addAppointment,
+    removeAppointment,
+    completeAppointment,
+  };
 
   return (
     <GlobalContext.Provider value={value}>

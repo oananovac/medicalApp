@@ -91,7 +91,7 @@ router.put("/:appointmentId/complete", requiresAuth, async (req, res) => {
       { new: true }
     );
 
-    return res.json({ updatedAppointment: updatedAppointment });
+    return res.json(updatedAppointment);
   } catch (error) {
     console.log("[*] Error " + error);
 

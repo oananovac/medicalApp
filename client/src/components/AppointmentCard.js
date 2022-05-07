@@ -1,11 +1,14 @@
+import axios from "axios";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const AppointmentCard = ({ appointment }) => {
   const [content, setContent] = React.useState(appointment.content);
   const [editing, setEditing] = React.useState(false);
   const input = React.useRef(null);
   const navigate = useNavigate();
+  const { removeAppointment, completeAppointment } = useGlobalContext();
 
   const onEdit = (e) => {
     e.preventDefault();
@@ -23,9 +26,25 @@ const AppointmentCard = ({ appointment }) => {
     setContent(appointment.content);
   };
 
+  const deleteAppointment = (e) => {
+    e.preventDefault();
+
+    if (window.confirm("Are you sure you want to delete?")) {
+      axios
+        .delete(`/api/appointments/${appointment._id}`)
+        .then(() => removeAppointment(appointment));
+    }
+  };
+
+  const markAsComplete = (e) => {
+    e.preventDefault();
+    axios
+      .put(`/api/appointments/${appointment._id}/complete`)
+      .then((res) => completeAppointment(res.data));
+  };
+
   return (
     <div className="appointmentItem">
-      <input type="checkbox" />
       <input
         className="appointmentContent"
         type="text"
@@ -38,15 +57,28 @@ const AppointmentCard = ({ appointment }) => {
         {!editing ? (
           <>
             {!appointment.completed && (
-              <button
-                className="control-buttons btn btn-success"
-                onClick={onEdit}
-              >
-                Edit
-              </button>
+              <>
+                <button
+                  className="control-buttons btn btn-success"
+                  onClick={onEdit}
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={markAsComplete}
+                  className="control-buttons btn btn-warning"
+                >
+                  Complete
+                </button>
+              </>
             )}
 
-            <button className="control-buttons btn btn-danger">Cancel</button>
+            <button
+              onClick={deleteAppointment}
+              className="control-buttons btn btn-danger"
+            >
+              Cancel
+            </button>
           </>
         ) : (
           <>
